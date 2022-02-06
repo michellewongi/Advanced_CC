@@ -1,14 +1,15 @@
 # Week 2 process
 
-Created an iterative pattern using Pixi.js.
+Creating an iterative pattern using Pixi.js.
 
 Here is a snippet of my code that I am proud of:
 ```typescript
- for (let y = 20; y < window.innerHeight; y += 108) {
-    for (let x = 30; x < window.innerWidth - 100; x += 100) {
-      draw.beginFill(0x533e42, 1);
-      draw.drawRect(x, y, 100, 15);
+  for (let y = 50; y < window.innerHeight - 50; y += 120) {
+    for (let x = 72; x < window.innerWidth - 130; x += 200) {
+      draw.lineStyle(4, 0x72bab6);
+      draw.beginFill(0xffffaa, 1);
+      draw.drawRoundedRect(x, y, 95, 95, 35);
+      draw.endFill();
     }
   }
-  
 ```
