@@ -46,8 +46,8 @@ const main = async () => {
     }
   }
 
-  for (let y = 50; y < window.innerHeight; y += 65) {
-    for (let x = 50; x < window.innerWidth; x += 60) {
+  for (let y = 50; y < window.innerHeight - 100; y += 65) {
+    for (let x = 50; x < window.innerWidth - 100; x += 60) {
       draw.endFill();
       draw.lineStyle(3, 0xffffff);
       draw.drawRect(60, 60, y - 50, y - 40);
