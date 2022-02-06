@@ -1,21 +1,16 @@
-# Advanced Creative Coding Week 2
+# Week 2 process
 
-# Table of contents
+Created an iterative pattern using Pixi.js.
 
-- [Overview](#overview)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
+Here is a snippet of my code:
+```typescript
+// you can include snippets of code that you're proud of here
 
-## Overview
-
-### Links
-
-- Live Site URL: []
-
-## My process
-
-### Built with
-
-- Pixi.js
-
+ for (let y = 20; y < window.innerHeight; y += 108) {
+    for (let x = 30; x < window.innerWidth - 100; x += 100) {
+      draw.beginFill(0x533e42, 1);
+      draw.drawRect(x, y, 100, 15);
+    }
+  }
+  
+```
