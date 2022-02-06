@@ -14,8 +14,8 @@ const main = async () => {
 
   let draw = new PIXI.Graphics();
 
-  for (let y = 50; y < window.innerHeight - 50; y += 120) {
-    for (let x = 72; x < window.innerWidth - 130; x += 200) {
+  for (let y = 40; y < window.innerHeight; y += 120) {
+    for (let x = 40; x < window.innerWidth - 130; x += 200) {
       draw.lineStyle(4, 0x72bab6);
       draw.beginFill(0xffffaa, 1);
       draw.drawRoundedRect(x, y, 95, 95, 35);
@@ -23,24 +23,24 @@ const main = async () => {
     }
   }
 
-  for (let y = 60; y < window.innerHeight - 50; y += 105) {
-    for (let x = 180; x < window.innerWidth - 130; x += 200) {
+  for (let y = 70; y < window.innerHeight; y += 105) {
+    for (let x = 150; x < window.innerWidth - 130; x += 200) {
       draw.lineStyle(4, 0xffffaa);
       draw.beginFill(0x72bab6, 1);
       draw.drawRect(x, y, 75, 75);
     }
   }
 
-  for (let y = 94; y < window.innerHeight; y += 120) {
-    for (let x = 120; x < window.innerWidth - 100; x += 200) {
+  for (let y = 88; y < window.innerHeight; y += 120) {
+    for (let x = 88; x < window.innerWidth - 100; x += 200) {
       draw.lineStyle(3, 0x72bab6);
       draw.beginFill(0x72bab6, 1);
       draw.drawCircle(x, y, 35);
     }
   }
 
-  for (let y = 97; y < window.innerHeight; y += 105) {
-    for (let x = 217; x < window.innerWidth - 100; x += 200) {
+  for (let y = 108; y < window.innerHeight; y += 105) {
+    for (let x = 189; x < window.innerWidth - 100; x += 200) {
       draw.beginFill(0xffffaa, 1);
       draw.drawCircle(x, y, 20);
     }
