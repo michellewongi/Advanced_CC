@@ -24,7 +24,7 @@ const main = async () => {
   }
 
   for (let y = 70; y < window.innerHeight; y += 105) {
-    for (let x = 115; x < window.innerWidth; x += 200) {
+    for (let x = 110; x < window.innerWidth; x += 200) {
       draw.lineStyle(4, 0xffffaa);
       draw.beginFill(0x72bab6, 1);
       draw.drawRect(x, y, 75, 75);
@@ -40,7 +40,7 @@ const main = async () => {
   }
 
   for (let y = 108; y < window.innerHeight; y += 105) {
-    for (let x = 153; x < window.innerWidth; x += 200) {
+    for (let x = 148; x < window.innerWidth; x += 200) {
       draw.beginFill(0xffffaa, 1);
       draw.drawCircle(x, y, 20);
     }
