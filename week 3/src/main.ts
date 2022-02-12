@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+import { Filter } from "pixi.js";
 
 const load = (app: PIXI.Application) => {
   return new Promise<void>((resolve) => {
@@ -33,74 +34,115 @@ const main = async () => {
 
   document.body.appendChild(app.view);
 
-  // draw frame for calender
-  const frame = new PIXI.Graphics();
-  frame.beginFill(0xffffff);
-  frame.drawRect(
-    window.innerWidth / 2 - 300,
-    window.innerHeight / 2 - 30,
-    600,
-    60
-  );
-  app.stage.addChild(frame);
+  let hour = new Date().getHours();
 
-  // square representing seconds passed
-  const square = new PIXI.Graphics();
-  square.beginFill(0x00aaaa);
-  square.drawRect(
-    window.innerWidth / 2 - 300,
-    window.innerHeight / 2 - 30,
-    10,
-    10
-  );
-  app.stage.addChild(square);
-
-  // container for dog sprites
-  const dogContainer = new PIXI.Container();
-  app.stage.addChild(dogContainer);
-
-  const catContainer = new PIXI.Container();
-  app.stage.addChild(catContainer);
-
-  // function to add a dog sprite to dogContainer
   function addDog() {
     const dog = PIXI.Sprite.from("assets/dog.png");
+    dog.interactive = true;
+    dog.buttonMode = true;
+    // event listeners
+    dog.on("pointerover", function () {
+      dog.scale.set(1);
+    });
+    dog.on("pointerout", function () {
+      dog.scale.set(0.4);
+    });
     dog.scale.set(0.4);
     dog.position.x = Math.random() * window.innerWidth;
     dog.position.y = Math.random() * window.innerHeight;
     dog.anchor.set(0.5);
-    dogContainer.addChild(dog);
+    app.stage.addChild(dog);
   }
 
-  // function to add a cat sprite to window
   function addCat() {
     const cat = PIXI.Sprite.from("assets/cat.png");
+    cat.interactive = true;
+    cat.buttonMode = true;
+
+    // event listeners
+    cat.on("pointerover", function () {
+      cat.scale.set(0.3);
+    });
+    cat.on("pointerout", function () {
+      cat.scale.set(0.5);
+    });
+
     cat.scale.set(0.5);
     cat.position.x = Math.random() * window.innerWidth;
     cat.position.y = Math.random() * window.innerHeight;
     cat.anchor.set(0.5);
-    catContainer.addChild(cat);
-
-    // every hour refreshes
-    if (catContainer.children.length >= 60) {
-      catContainer.removeChildren();
-    }
+    app.stage.addChild(cat);
   }
 
-  // timer for callback function
-  app.ticker.add(() => {
-    if (square.x === 590 && square.y < 60) {
-      addDog();
-      square.x = 0;
-      square.y += 10;
-    } else if (square.y < 60 && square.x < 590) {
-      square.x += 1;
-    } else if (square.y === 60) {
-      square.y = 0;
-      dogContainer.removeChildren();
-      addCat();
-    }
-  });
+  if (hour % 2 === 0) {
+    addDog();
+  } else if (hour % 2 !== 0) {
+    addCat();
+  }
+
+  // // container for dog sprites
+  // const dogContainer = new PIXI.Container();
+  // app.stage.addChild(dogContainer);
+
+  // const catContainer = new PIXI.Container();
+  // app.stage.addChild(catContainer);
+
+  // // function to add a dog sprite to dogContainer
+  // function addDog() {
+  //   const dog = PIXI.Sprite.from("assets/dog.png");
+  //   dog.interactive = true;
+  //   dog.buttonMode = true;
+
+  //   // event listeners
+  //   dog.on("pointerover", function () {
+  //     dog.scale.set(1);
+  //   });
+  //   dog.on("pointerout", function () {
+  //     dog.scale.set(0.4);
+  //   });
+  //   dog.scale.set(0.4);
+  //   dog.position.x = Math.random() * window.innerWidth;
+  //   dog.position.y = Math.random() * window.innerHeight;
+  //   dog.anchor.set(0.5);
+  //   dogContainer.addChild(dog);
+  // }
+
+  // // function to add a cat sprite to window
+  // function addCat() {
+  //   const cat = PIXI.Sprite.from("assets/cat.png");
+  //   cat.interactive = true;
+  //   cat.buttonMode = true;
+
+  //   // event listeners
+  //   cat.on("pointerover", function () {
+  //     cat.scale.set(0.3);
+  //   });
+  //   cat.on("pointerout", function () {
+  //     cat.scale.set(0.5);
+  //   });
+
+  //   cat.scale.set(0.5);
+  //   cat.position.x = Math.random() * window.innerWidth;
+  //   cat.position.y = Math.random() * window.innerHeight;
+  //   cat.anchor.set(0.5);
+  //   catContainer.addChild(cat);
+
+  // }
+
+  // // timer for callback function
+  // app.ticker.add(() => {
+  //   if (square.x === 590 && square.y < 60) {
+  //     addDog();
+  //     square.x = 0;
+  //     square.y += 10;
+  //   } else if (square.y < 60 && square.x < 590) {
+  //     square.x += 1;
+  //   } else if (square.y === 60) {
+  //     square.y = 0;
+  //     dogContainer.removeChildren();
+  //     addCat();
+  //   }
+  // });
 };
 
 // Cannot be an arrow function. Arrow functions cannot have a 'this' parameter.
