@@ -1,0 +1,23 @@
+{
+  "name": "vite-pixi-ts-quickstart",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "watch": "tsc --watch",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.7",
+    "@types/offscreencanvas": "^2019.6.4",
+    "pixi.js": "^6.2.2",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "@pixi/graphics-extras": "^6.2.2",
+    "dat.gui": "^0.7.7",
+    "esbuild": "^0.14.21",
+    "pixi-filters": "^4.1.5"
+  }
+}
