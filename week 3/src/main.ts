@@ -34,8 +34,6 @@ const main = async () => {
 
   document.body.appendChild(app.view);
 
-  let hour = new Date().getHours();
-
   function addDog() {
     const dog = PIXI.Sprite.from("assets/dog.png");
     dog.interactive = true;
@@ -74,10 +72,208 @@ const main = async () => {
     app.stage.addChild(cat);
   }
 
+  let hour = new Date().getHours();
+
   if (hour % 2 === 0) {
-    addDog();
+    for (let x = 30; x < window.innerWidth; x += 90) {
+      for (let y = 30; y < window.innerHeight; y += 90) {
+        const circle = new PIXI.Graphics();
+        circle.beginFill(0xffffff);
+        circle.drawCircle(x, y, 18);
+        app.stage.addChild(circle);
+      }
+    }
+
+    if (hour === 8 || hour === 20) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 7 || hour === 19) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 6 || hour === 18) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 5 || hour === 17) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 4 || hour === 16) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 3 || hour === 15) {
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 2 || hour === 14) {
+      addDog();
+      addDog();
+    } else if (hour === 1 || hour === 13) {
+      addDog();
+    } else if (hour === 9 || hour === 21) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 10 || hour === 22) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 11 || hour === 22) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    } else if (hour === 12) {
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+      addDog();
+    }
   } else if (hour % 2 !== 0) {
-    addCat();
+    if (hour === 8 || hour === 20) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 7 || hour === 19) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 6 || hour === 18) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 5 || hour === 17) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 4 || hour === 16) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 3 || hour === 15) {
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 2 || hour === 14) {
+      addCat();
+      addCat();
+    } else if (hour === 1 || hour === 13) {
+      addCat();
+    } else if (hour === 9 || hour === 21) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 10 || hour === 22) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 11 || hour === 22) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    } else if (hour === 12) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+    }
+
+    for (let x = 50; x < window.innerWidth; x += 90) {
+      const circle = new PIXI.Graphics();
+      circle.lineStyle(10, 0xffffff);
+      circle.drawCircle(x, x, x * 1.5);
+      app.stage.addChild(circle);
+    }
   }
 
   // // container for dog sprites
