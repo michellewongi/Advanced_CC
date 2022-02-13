@@ -34,8 +34,7 @@ const main = async () => {
 
   document.body.appendChild(app.view);
 
-  // let hour = new Date().getHours();
-  let hour = 10;
+  let hour = new Date().getHours();
 
   function addDog() {
     const dog = PIXI.Sprite.from("assets/dog.png");
