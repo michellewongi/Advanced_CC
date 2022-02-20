@@ -144,12 +144,6 @@ const main = async () => {
     }
     if (hour === 1 || hour === 13) {
       addCat();
-      addCat();
-      addCat();
-      addCat();
-      addCat();
-      addCat();
-      addCat();
     } else if (hour === 3 || hour === 15) {
       addCat();
       addCat();
@@ -161,6 +155,12 @@ const main = async () => {
       addCat();
       addCat();
     } else if (hour === 7 || hour === 19) {
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
+      addCat();
       addCat();
     } else if (hour === 9 || hour === 21) {
       addCat();
