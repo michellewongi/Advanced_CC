@@ -49,6 +49,22 @@ const main = async () => {
     });
   }
 
+  for (let x = -350; x <= width + 300; x += 50) {
+    for (let y = -350; y <= height + 300; y += 50) {
+      let circle = new PIXI.Graphics();
+      circle.lineStyle(2, 0xffffff);
+      circle.drawCircle(x + 10, y + 100, 10);
+      app.stage.addChild(circle);
+
+      gsap.to(circle, {
+        rotation: -Math.cos(y + x / 2),
+        repeat: -1,
+        duration: 2,
+        yoyo: true,
+      });
+    }
+  }
+
   for (let x = -150; x <= width + 100; x += 50) {
     for (let y = -150; y <= height + 100; y += 100) {
       let rect = new PIXI.Graphics();
@@ -64,54 +80,6 @@ const main = async () => {
       });
     }
   }
-
-  // previous attempt
-  // let circle = new PIXI.Graphics();
-  // circle.beginFill(0xff7f01);
-  // circle.drawCircle(50, 0, 15);
-  // app.stage.addChild(circle);
-
-  // gsap.to(circle, {
-  //   duration: 3,
-  //   y: height + 150,
-  //   repeat: -1,
-  // });
-
-  // let circle2 = new PIXI.Graphics();
-  // circle2.beginFill(0xff7f01);
-  // circle2.drawCircle(150, 0, 15);
-  // app.stage.addChild(circle2);
-
-  // gsap.to(circle2, {
-  //   duration: 3,
-  //   delay: 0.2,
-  //   y: height + 150,
-  //   repeat: -1,
-  // });
-
-  // let circle3 = new PIXI.Graphics();
-  // circle3.beginFill(0xff7f01);
-  // circle3.drawCircle(250, 0, 15);
-  // app.stage.addChild(circle3);
-
-  // gsap.to(circle3, {
-  //   duration: 3,
-  //   delay: 0.4,
-  //   y: height + 150,
-  //   repeat: -1,
-  // });
-
-  // let circle4 = new PIXI.Graphics();
-  // circle4.beginFill(0xff7f01);
-  // circle4.drawCircle(350, 0, 15);
-  // app.stage.addChild(circle4);
-
-  // gsap.to(circle4, {
-  //   duration: 3,
-  //   delay: 0.6,
-  //   y: height + 150,
-  //   repeat: -1,
-  // });
 
   document.body.appendChild(app.view);
 };
