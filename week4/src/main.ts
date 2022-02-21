@@ -33,18 +33,19 @@ const main = async () => {
   let height = window.innerHeight;
   let shapeTexture = app.loader.resources["shape"].texture;
 
-  for (let x = -300; x <= width + 300; x += 100) {
+  for (let x = 0; x <= width + 300; x += 120) {
     let circle = new PIXI.Sprite(shapeTexture);
-    circle.scale.set(0.15);
+    circle.x = 0;
+    circle.y = x;
+    circle.scale.set(0.05);
     app.stage.addChild(circle);
 
     gsap.to(circle, {
-      rotation: -Math.cos(x),
-      duration: 2,
-      x: x,
-      y: height / 2 - 100,
+      x: width,
+      rotation: 10,
+      ease: "ease-in",
       repeat: -1,
-      ease: "power2.out",
+      duration: 3,
       yoyo: true,
     });
   }

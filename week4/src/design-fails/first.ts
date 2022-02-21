@@ -1,4 +1,3 @@
-// previous attempt
 // let circle = new PIXI.Graphics();
 // circle.beginFill(0xff7f01);
 // circle.drawCircle(50, 0, 15);
