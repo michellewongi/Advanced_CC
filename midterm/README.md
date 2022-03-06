@@ -2,12 +2,17 @@
 
 ## Overview
 
-For my midterm, I created a landscape scene and users can navigate around the scene through a peep-hole. When the user clicks down anywhere on the screen, the whole scene is revealed with a frame instead of a peep-hole. I applied a displacement filter to the clouds to make them look like water ripples. I also applied a glitch filter to the moon sprite.
+For my midterm, I created a landscape scene and users can navigate around the scene through a peephole. When the user clicks down anywhere on the screen, the whole scene is revealed with a different frame instead of a peephole. I applied a displacement filter to the clouds to make them look like water ripples and I also applied a glitch filter to the moon sprite. For the movement of the waves, I used tweens to animate them.
 
 ## Initial Concept
 
-My original idea was to create a scene of a moon and the ocean. I ended up adding more elements like the peep-hole/frame and filters.
+My original idea was a more simplified version of this which was to just create a landscape scene. I ended up feeling like the scene was too static so I ended up adding more elements/effects.
 
 ## Further Development
 
-I want to add a screenshot functionality that will only take a screenshot of the view within the polaroid film.
+I want to add a screenshot functionality that will only take a screenshot of the view within the polaroid film. I also want to add audio to the scene to play as background music.
+
+## Technologies
+
+- PixiJS
+- TypeScript
