@@ -1,6 +1,6 @@
 # Advanced Creative Coding Midterm Project
 
-- Live: (https://michellewongi.github.io/Advanced_CC/midterm/dist/)[https://michellewongi.github.io/Advanced_CC/midterm/dist/]
+- Live: [https://michellewongi.github.io/Advanced_CC/midterm/dist/](https://michellewongi.github.io/Advanced_CC/midterm/dist/)
 
 ## Overview
 
