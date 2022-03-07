@@ -65,7 +65,7 @@ const main = async () => {
 
     const shot = new PIXI.Graphics();
     shot.beginFill(0x000000);
-    shot.drawCircle(0, 0, 100);
+    shot.drawCircle(0, 0, 130);
     frameCon.addChild(shot);
     app.stage.interactive = true;
     app.stage.mask = shot;
@@ -164,31 +164,31 @@ const main = async () => {
     let cloud = PIXI.Sprite.from("assets/cloud.png");
     cloud.scale.set(0.2);
     cloud.x = width / 2 - 720;
-    cloud.y = height / 2 - 320;
+    cloud.y = 130;
     cloudsCon.addChild(cloud);
 
     let cloud2 = PIXI.Sprite.from("assets/cloud.png");
     cloud2.scale.set(0.2);
     cloud2.x = width / 2 - 180;
-    cloud2.y = height / 2 - 360;
+    cloud2.y = 100;
     cloudsCon.addChild(cloud2);
 
     let cloud3 = PIXI.Sprite.from("assets/cloud.png");
     cloud3.scale.set(0.2);
     cloud3.x = width / 2 - 450;
-    cloud3.y = height / 2 - 250;
+    cloud3.y = 10;
     cloudsCon.addChild(cloud3);
 
     let cloud4 = PIXI.Sprite.from("assets/cloud.png");
     cloud4.scale.set(0.2);
     cloud4.x = width / 2 + 200;
-    cloud4.y = height / 2 - 300;
+    cloud4.y = 20;
     cloudsCon.addChild(cloud4);
 
     let cloud5 = PIXI.Sprite.from("assets/cloud.png");
     cloud5.scale.set(0.2);
     cloud5.x = width / 2 + 400;
-    cloud5.y = height / 2 - 200;
+    cloud5.y = 120;
     cloudsCon.addChild(cloud5);
     cloudsCon.filters = [displacement];
 
