@@ -6,7 +6,7 @@ let wavesCon = new PIXI.Container();
 let cloudsCon = new PIXI.Container();
 let moonCon = new PIXI.Container();
 let frameCon = new PIXI.Container();
-let t1 = gsap.timeline();
+let bgCon = new PIXI.Container();
 let width = window.innerWidth;
 let height = window.innerHeight;
 
@@ -17,6 +17,8 @@ const load = (app: PIXI.Application) => {
       .add("moon", "assets/moon.png")
       .add("cloud", "assets/cloud.png")
       .add("bg", "assets/bg.jpg")
+      .add("bg2", "assets/bg2.jpg")
+      .add("sun", "assets/sun.png")
       .add("frame", "assets/frame.png")
       .load(() => {
         resolve();
@@ -46,6 +48,7 @@ const main = async () => {
   });
 
   scene();
+  app.stage.addChild(bgCon);
   app.stage.addChild(moonCon);
   app.stage.addChild(cloudsCon);
   app.stage.addChild(wavesCon);
@@ -55,7 +58,7 @@ const main = async () => {
   function scene() {
     // add frames
     const frame = PIXI.Sprite.from("assets/frame.png");
-    frame.scale.set(0.8);
+    frame.scale.set(0.6);
     frame.anchor.set(0.5);
     frame.x = width / 2;
     frame.y = height / 2;
@@ -74,10 +77,18 @@ const main = async () => {
       if (frameCon.children.includes(shot)) {
         frameCon.removeChild(shot);
         frameCon.addChild(frame);
+        moonCon.removeChild(sun);
+        moonCon.addChild(moon);
+        bgCon.removeChild(bg2);
+        bgCon.addChild(bg);
         app.stage.mask = null;
       } else {
         frameCon.removeChild(frame);
         frameCon.addChild(shot);
+        moonCon.removeChild(moon);
+        moonCon.addChild(sun);
+        bgCon.removeChild(bg);
+        bgCon.addChild(bg2);
         app.stage.mask = shot;
       }
     }
@@ -95,8 +106,13 @@ const main = async () => {
     const bg = PIXI.Sprite.from("assets/bg.jpg");
     bg.anchor.set(0.5);
     bg.position.set(app.screen.width / 2, app.screen.height / 2);
-    bg.scale.set(0.4);
-    app.stage.addChild(bg);
+    bg.scale.set(0.3);
+
+    const bg2 = PIXI.Sprite.from("assets/bg2.jpg");
+    bg2.anchor.set(0.5);
+    bg2.position.set(app.screen.width / 2, app.screen.height / 2);
+    bg2.scale.set(2);
+    bgCon.addChild(bg2);
 
     // add filters
     const filterTexture = PIXI.Sprite.from("assets/filter.png");
@@ -114,15 +130,33 @@ const main = async () => {
       filterTexture.y += 3;
     });
 
-    // add moon
+    // add moon and sun
     let moon = PIXI.Sprite.from("assets/moon.png");
     moon.scale.set(0.3);
     moon.x = width / 2 - 300;
     moon.y = height / 2 + 500;
-    moonCon.addChild(moon);
+    moon.interactive = true;
+    moon.on("pointerover", function () {
+      glitch.refresh();
+    });
+
+    let sun = PIXI.Sprite.from("assets/sun.png");
+    sun.scale.set(0.06);
+    sun.x = width / 2 - 250;
+    sun.y = height / 2 + 500;
+    sun.interactive = true;
+    sun.on("pointerover", function () {
+      glitch.refresh();
+    });
+    moonCon.addChild(sun);
 
     gsap.to(moon, {
       y: 140,
+      duration: 4,
+    });
+
+    gsap.to(sun, {
+      y: 200,
       duration: 4,
     });
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-For my midterm, I created a landscape scene and users can navigate around the scene through a peephole. When the user clicks down anywhere on the screen, the whole scene is revealed with a different frame instead of a peephole. I applied a displacement filter to the clouds to make them look like water ripples and I also applied a glitch filter to the moon sprite. For the movement of the waves, I used tweens to animate them.
+For my midterm, I created a landscape scene and users can navigate around the day scene through a peephole. When the user clicks down anywhere on the screen, the scene changes to night and the whole scene is revealed. I applied a displacement filter to the clouds to make them look like water ripples and I also applied a glitch filter to the moon sprite. For the movement of the waves, I used tweens to animate them.
 
 ## Initial Concept
 
