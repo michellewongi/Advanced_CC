@@ -54,7 +54,6 @@ const main = async () => {
   app.stage.addChild(wavesCon);
   app.stage.addChild(frameCon);
 
-  // scene one
   function scene() {
     // add frames
     const frame = PIXI.Sprite.from("assets/frame.png");
@@ -106,12 +105,12 @@ const main = async () => {
     const bg = PIXI.Sprite.from("assets/bg.jpg");
     bg.anchor.set(0.5);
     bg.position.set(app.screen.width / 2, app.screen.height / 2);
-    bg.scale.set(0.3);
+    bg.scale.set(0.6);
 
     const bg2 = PIXI.Sprite.from("assets/bg2.jpg");
     bg2.anchor.set(0.5);
     bg2.position.set(app.screen.width / 2, app.screen.height / 2);
-    bg2.scale.set(2);
+    bg2.scale.set(2.5);
     bgCon.addChild(bg2);
 
     // add filters
@@ -151,12 +150,12 @@ const main = async () => {
     moonCon.addChild(sun);
 
     gsap.to(moon, {
-      y: 140,
+      y: height / 2 - 200,
       duration: 4,
     });
 
     gsap.to(sun, {
-      y: 200,
+      y: height / 2 - 200,
       duration: 4,
     });
 
@@ -297,6 +296,24 @@ const main = async () => {
         repeat: -1,
         duration: 2,
         delay: 1,
+      });
+    }
+
+    for (let x = 0; x < width + 200; x += 200) {
+      let wave = new PIXI.Graphics();
+      wave.lineStyle(6, 0xffffff);
+      wave.beginFill(0x2c4b8d);
+      wave.drawCircle(x, height / 2 + 610, 100);
+      wave.drawCircle(x, height / 2 + 610, 70);
+      wave.drawCircle(x, height / 2 + 610, 40);
+      wavesCon.addChild(wave);
+
+      gsap.to(wave, {
+        y: -20,
+        yoyo: true,
+        repeat: -1,
+        duration: 2,
+        delay: 2,
       });
     }
   }
