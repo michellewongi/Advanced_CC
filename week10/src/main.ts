@@ -2,9 +2,7 @@ import './style.scss';
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { DragControls } from 'three/examples/jsm/controls/DragControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { ObjectLoader, Raycaster, ShaderMaterial, Shading, Vector2 } from 'three';
 import * as dat from 'dat.gui';
 
 let renderer: THREE.WebGLRenderer;
@@ -20,17 +18,19 @@ let stats: any;
 let clone: THREE.Object3D = new THREE.Object3D();
 let table: THREE.Object3D = new THREE.Object3D();
 let plane: THREE.Mesh;
-let raycaster: THREE.Raycaster = new THREE.Raycaster();
-let mouse: THREE.Vector2 = new THREE.Vector2();
+let ground: THREE.Mesh;
 let group: THREE.Group = new THREE.Group();
+let secondGroup: THREE.Group = new THREE.Group();
 
 // add GUI
 const model = {
-	angle: 0,
+	firstAngle: 0,
+	secondAngle: 0,
 };
 
 const gui = new dat.GUI();
-gui.add(model, 'angle', 0, Math.PI * 2.0, 0.01);
+gui.add(model, 'firstAngle', 0, Math.PI * 2.0, 0.01);
+gui.add(model, 'secondAngle', 0, Math.PI * 2.0, 0.01);
 
 function main() {
 	initScene();
@@ -46,7 +46,7 @@ function initStats() {
 function initScene() {
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color(0x63cbff);
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 	camera.position.z = 5;
 
 	renderer = new THREE.WebGLRenderer();
@@ -85,13 +85,13 @@ function initScene() {
 	lightPoint.shadow.camera.far = cameraFar;
 
 	// Add GLTF
-	const loader2 = new GLTFLoader();
-	loader2.load('../resources/table.gltf', (gltf: any) => {
+	const tableLoader = new GLTFLoader();
+	tableLoader.load('../resources/table.gltf', (gltf: any) => {
 		table = gltf.scene;
 		table.castShadow = true;
 		table.position.setY(-1);
 		table.scale.set(0.006, 0.006, 0.006);
-		table.position.setX(2);
+		table.position.setX(2.5);
 
 		const colorMap = new THREE.MeshPhongMaterial({ color: 0x7552c7 });
 
@@ -133,23 +133,42 @@ function initScene() {
 		group.add(clone);
 	});
 
-	// Add a plane
-	const geometryPlane = new THREE.PlaneBufferGeometry(6, 6, 10, 10);
-	const materialPlane = new THREE.MeshPhongMaterial({
-		color: 0x226100,
-		side: THREE.DoubleSide,
-		flatShading: true,
+	const loader2 = new GLTFLoader();
+	loader2.load('../resources/clone.gltf', (gltf: any) => {
+		clone = gltf.scene;
+		clone.castShadow = true;
+		clone.position.setX(1);
+		clone.scale.set(0.005, 0.005, 0.005);
+		clone.rotateY(192);
+
+		const colorArr = [0xff0000, 0xffbcb8, 0xc9635d, 0x4ae3e8, 0x7552c7, 0xfff18a];
+
+		const colorMap = new THREE.MeshPhongMaterial({ color: colorArr[Math.floor(Math.random() * colorArr.length)] });
+
+		interface gltfMesh extends THREE.Object3D<THREE.Event> {
+			material: THREE.Material;
+		}
+
+		clone.traverse((child: THREE.Object3D<THREE.Event>) => {
+			if (child.type === 'Mesh') {
+				(child as gltfMesh).material = colorMap;
+			}
+		});
+
+		secondGroup.add(clone);
 	});
 
-	plane = new THREE.Mesh(geometryPlane, materialPlane);
-	plane.rotateX(190);
-	plane.scale.set(4, 4, 4);
-	plane.position.setY(-1.5);
-	plane.position.setX(3);
-	plane.receiveShadow = true;
-	scene.add(plane);
+	// Add a box
+	const materialPlane = new THREE.MeshPhongMaterial({
+		color: 0x226100,
+	});
+	const boxGeometry = new THREE.BoxGeometry(100, 10, 100);
+	ground = new THREE.Mesh(boxGeometry, materialPlane);
+	ground.position.setY(-6.3);
+	scene.add(ground);
 
 	scene.add(group);
+	scene.add(secondGroup);
 
 	// Init animation
 	animate();
@@ -178,20 +197,36 @@ function initListeners() {
 				break;
 
 			// add keyboard interactions
-			case 'ArrowRight':
+			case 'd':
 				group.position.x += 0.2;
 				break;
 
-			case 'ArrowLeft':
+			case 'a':
 				group.position.x -= 0.2;
 				break;
 
-			case 'ArrowUp':
+			case 'w':
 				group.position.z -= 0.2;
 				break;
 
-			case 'ArrowDown':
+			case 's':
 				group.position.z += 0.2;
+				break;
+
+			case 'ArrowRight':
+				secondGroup.position.x += 0.2;
+				break;
+
+			case 'ArrowLeft':
+				secondGroup.position.x -= 0.2;
+				break;
+
+			case 'ArrowUp':
+				secondGroup.position.z -= 0.2;
+				break;
+
+			case 'ArrowDown':
+				secondGroup.position.z += 0.2;
 				break;
 
 			default:
@@ -211,9 +246,8 @@ function animate() {
 		animate();
 	});
 
-	group.rotation.set(0, model.angle, 0);
-
-	raycaster.setFromCamera(mouse, camera);
+	group.rotation.set(0, model.firstAngle, 0);
+	secondGroup.rotation.set(0, model.secondAngle, 0);
 
 	renderer.render(scene, camera);
 }
