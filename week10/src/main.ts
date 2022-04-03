@@ -16,7 +16,7 @@ let controls: OrbitControls;
 let stats: any;
 
 let clone: THREE.Object3D = new THREE.Object3D();
-let table: THREE.Object3D = new THREE.Object3D();
+let bunny: THREE.Object3D = new THREE.Object3D();
 let plane: THREE.Mesh;
 let ground: THREE.Mesh;
 let group: THREE.Group = new THREE.Group();
@@ -85,31 +85,36 @@ function initScene() {
 	lightPoint.shadow.camera.far = cameraFar;
 
 	// Add GLTF
-	const tableLoader = new GLTFLoader();
-	tableLoader.load('../resources/table.gltf', (gltf: any) => {
-		table = gltf.scene;
-		table.castShadow = true;
-		table.position.setY(-1);
-		table.scale.set(0.006, 0.006, 0.006);
-		table.position.setX(2.5);
+	const bunnyLoader = new GLTFLoader();
+	for (let x = -4; x <= 4; x += 2) {
+		for (let z = -4; z <= 4; z += 2) {
+			bunnyLoader.load('../resources/bunny.gltf', (gltf: any) => {
+				bunny = gltf.scene;
+				bunny.castShadow = true;
+				bunny.position.setY(-1);
+				bunny.position.setX(x);
+				bunny.position.setZ(z);
+				bunny.scale.set(0.006, 0.006, 0.006);
 
-		const colorMap = new THREE.MeshPhongMaterial({ color: 0x7552c7 });
+				const colorMap = new THREE.MeshPhongMaterial({ color: 0x7552c7 });
 
-		interface gltfMesh extends THREE.Object3D<THREE.Event> {
-			material: THREE.Material;
+				interface gltfMesh extends THREE.Object3D<THREE.Event> {
+					material: THREE.Material;
+				}
+
+				bunny.traverse((child: THREE.Object3D<THREE.Event>) => {
+					if (child.type === 'Mesh') {
+						(child as gltfMesh).material = colorMap;
+					}
+				});
+
+				scene.add(bunny);
+			});
 		}
+	}
 
-		table.traverse((child: THREE.Object3D<THREE.Event>) => {
-			if (child.type === 'Mesh') {
-				(child as gltfMesh).material = colorMap;
-			}
-		});
-
-		scene.add(table);
-	});
-
-	const loader = new GLTFLoader();
-	loader.load('../resources/clone.gltf', (gltf: any) => {
+	const characterLoader = new GLTFLoader();
+	characterLoader.load('../resources/clone.gltf', (gltf: any) => {
 		clone = gltf.scene;
 		clone.castShadow = true;
 		clone.position.setX(-1);
@@ -133,8 +138,8 @@ function initScene() {
 		group.add(clone);
 	});
 
-	const loader2 = new GLTFLoader();
-	loader2.load('../resources/clone.gltf', (gltf: any) => {
+	const characterLoader2 = new GLTFLoader();
+	characterLoader2.load('../resources/clone.gltf', (gltf: any) => {
 		clone = gltf.scene;
 		clone.castShadow = true;
 		clone.position.setX(1);
@@ -162,7 +167,7 @@ function initScene() {
 	const materialPlane = new THREE.MeshPhongMaterial({
 		color: 0x226100,
 	});
-	const boxGeometry = new THREE.BoxGeometry(100, 10, 100);
+	const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
 	ground = new THREE.Mesh(boxGeometry, materialPlane);
 	ground.position.setY(-6.3);
 	scene.add(ground);
