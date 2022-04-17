@@ -1,4 +1,4 @@
-# Week 4 Process
+# Week 4: Waves
 
 Creating a wave animation
 

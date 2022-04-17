@@ -1,4 +1,4 @@
-# Week 3 process
+# Week 3: Clock
 
 Creating an abstract clock
 
