@@ -6,9 +6,9 @@ For my final concept I wanted to create an interactive 3D scene. I wanted to hav
 
 ## Inspirations
 
-[](http://3.bp.blogspot.com/-xzmFPaz6iSE/TmB9XbxzCcI/AAAAAAAACpY/yN4HXOeI2BY/s280/water_simulation.png)
-[](https://blog.logrocket.com/wp-content/uploads/2022/01/three-js-water-example.png)
-[](https://external-preview.redd.it/1KcNJ4ifR5OMfvc0dsCkWFhpHYq2sM_TLpaFxf_00z8.jpg?width=640&crop=smart&auto=webp&s=ed7e6a2f4767a4fdf371ca53ee9fce69fee17663)
+[](./images/inspo1.jpg)
+[](./images/inspo2.png)
+[](./images/inspo3.jpg)
 
 ## Anticipated Challenges
 
