@@ -1,9 +1,7 @@
 import './style.scss';
 import * as THREE from 'three';
-import { Raycaster, ShaderMaterial, Shading, Vector2 } from 'three';
+import { Camera, ShaderMaterial } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import * as DAT from 'dat.gui';
 
 let model = {
@@ -15,19 +13,14 @@ let model = {
 
 let renderer: THREE.WebGLRenderer;
 let clock = new THREE.Clock();
-
 let stats: any;
-
+let camera: Camera;
 let pointerPosition: THREE.Vector2;
-
 let viewOne: ViewOne;
-let viewTwo: ViewTwo;
-
 let views: BaseView[] = [];
 
 import { ViewOne } from './view/ViewOne';
 import { BaseView } from './view/BaseView';
-import { ViewTwo } from './view/ViewTwo';
 let shaderMat: ShaderMaterial;
 
 function main() {
@@ -60,9 +53,6 @@ function initScene() {
 
 	viewOne = new ViewOne(model, renderer);
 	views.push(viewOne);
-
-	viewTwo = new ViewTwo(model, renderer);
-	views.push(viewTwo);
 
 	// controls = new OrbitControls(camera, renderer.domElement);
 
@@ -118,14 +108,23 @@ function initListeners() {
 				break;
 
 			case 'ArrowRight':
-				model.activeView = (model.activeView + 1) % views.length;
+				viewOne.group.position.x += 100;
+				viewOne.camera.position.x += 100;
 				break;
 
 			case 'ArrowLeft':
-				model.activeView = model.activeView - 1;
-				if (model.activeView < 0) {
-					model.activeView = views.length - 1;
-				}
+				viewOne.group.position.x -= 100;
+				viewOne.camera.position.x -= 100;
+				break;
+
+			case 'ArrowUp':
+				viewOne.group.position.z -= 100;
+				viewOne.camera.position.z -= 100;
+				break;
+
+			case 'ArrowDown':
+				viewOne.group.position.z += 100;
+				viewOne.camera.position.z += 100;
 				break;
 
 			default:
@@ -155,10 +154,6 @@ function animate() {
 	switch (model.activeView) {
 		case 0:
 			viewOne.update(clock);
-			break;
-
-		case 1:
-			viewTwo.update(clock);
 			break;
 
 		default:
