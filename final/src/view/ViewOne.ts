@@ -28,16 +28,16 @@ export class ViewOne extends BaseView {
 	interstellar: Mesh;
 	galaxy: Mesh;
 	water: Mesh;
-	board: Object3D;
-	person: Object3D;
-	fish: Object3D;
+	board!: Object3D;
+	person!: Object3D;
+	fish!: Object3D;
 	group: Group;
 	bubble: Mesh;
 	bubbleTwo: Mesh;
 	bubbleThree: Mesh;
 
-	constructor(model: any, renderer: WebGLRenderer) {
-		super(model, renderer);
+	constructor(renderer: WebGLRenderer) {
+		super(renderer);
 
 		this.lightAmbient = new AmbientLight(0x333333);
 		this.scene.add(this.lightAmbient);
@@ -201,7 +201,9 @@ export class ViewOne extends BaseView {
 		});
 	}
 
+	//@ts-ignore
 	update(clock: Clock): void {
+		//@ts-ignore
 		this.water.material.uniforms['time'].value += 1.0 / 30.0;
 
 		// check for collision and change background

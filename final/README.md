@@ -1,26 +1,12 @@
-# vite-threejs-ts-starter
+# Final Project
 
-A basic [THREE.js](https://threejs.org/) project in [TypeScript](https://www.typescriptlang.org/) with [Vite](https://vitejs.dev/). Includes OrbitControls, Stats and basic shadows.
+- Live: []
 
-<!-- View demo hosted on CloudFlare pages: [vite-threejs-ts-starter.pages.dev](https://vite-threejs-ts-starter.pages.dev/) -->
+## Overview
 
-<img src="https://github.com/defmech/vite-threejs-ts-starter/blob/main/resources/cube_1.png?raw=true" width="504" height="457">
+For my final project, I made a 3D ocean landscape. For the backgrounds of the scene, I loaded images as a texture inside the cube. For creating the water component of my scene, I referenced (Ken Kozma's tutorial)[https://www.liquid.fish/current/threejs]. You can move the character around with the arrow keys. I added 3 spheres in the scene that will change the scene when the user comes in contact with them.
 
-Press `e` key to export canvas as `PNG` in a new browser tab.
+## Technologies
 
-## Getting started
-
-Install dependencies.
-`npm install`
-
-Start development server.
-`npm run start`
-
-Build to for distribuition.
-`npm run build`
-
-<!-- ## Alternate Demos
-
-Toggle commented out code in `main.ts` to run the `Shader.ts` demo. Based on the `THREE.js` example from  [Book Of Shaders](https://thebookofshaders.com/04/).
-
-<img src="https://github.com/defmech/vite-threejs-ts-starter/blob/main/resources/shader_1.png?raw=true" width="512" height="512"> -->
+- Three.js
+- TypeScript

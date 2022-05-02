@@ -1,20 +1,11 @@
 import './style.scss';
 import * as THREE from 'three';
-import { Camera, ShaderMaterial } from 'three';
+import { ShaderMaterial } from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
-import * as DAT from 'dat.gui';
-
-let model = {
-	groupX: 0,
-	groupY: 0,
-	groupAngle: 0,
-	activeView: 0,
-};
 
 let renderer: THREE.WebGLRenderer;
 let clock = new THREE.Clock();
 let stats: any;
-let camera: Camera;
 let pointerPosition: THREE.Vector2;
 let viewOne: ViewOne;
 let views: BaseView[] = [];
@@ -26,20 +17,12 @@ let shaderMat: ShaderMaterial;
 function main() {
 	initScene();
 	initStats();
-	initGUI();
 	initListeners();
 }
 
 function initStats() {
 	stats = new (Stats as any)();
 	document.body.appendChild(stats.dom);
-}
-
-function initGUI() {
-	// const gui = new DAT.GUI();
-	// gui.add(model, 'groupX', -4, 4, 0.1);
-	// gui.add(model, 'groupY', -3, 3, 0.1);
-	// gui.add(model, 'groupAngle', 0, Math.PI * 2.0, 0.1);
 }
 
 function initScene() {
@@ -51,7 +34,7 @@ function initScene() {
 
 	document.body.appendChild(renderer.domElement);
 
-	viewOne = new ViewOne(model, renderer);
+	viewOne = new ViewOne(renderer);
 	views.push(viewOne);
 
 	// controls = new OrbitControls(camera, renderer.domElement);
@@ -151,20 +134,13 @@ function animate() {
 
 	shaderMat.uniforms.u_time.value += delta;
 
-	switch (model.activeView) {
-		case 0:
-			viewOne.update(clock);
-			break;
-
-		default:
-			break;
-	}
+	viewOne.update(clock);
 
 	if (stats) stats.update();
 
 	// if (controls) controls.update();
 
-	renderer.render(views[model.activeView].scene, views[model.activeView].camera);
+	renderer.render(viewOne.scene, viewOne.camera);
 }
 
 main();
