@@ -32,9 +32,14 @@ export class ViewOne extends BaseView {
 	person!: Object3D;
 	fish!: Object3D;
 	group: Group;
+	fishGroup: Group;
 	bubble: Mesh;
 	bubbleTwo: Mesh;
 	bubbleThree: Mesh;
+	planeOne: Mesh;
+	planeTwo: Mesh;
+	planeThree: Mesh;
+	planeFour: Mesh;
 
 	constructor(renderer: WebGLRenderer) {
 		super(renderer);
@@ -189,14 +194,52 @@ export class ViewOne extends BaseView {
 		this.bubbleThree.position.z = -2000;
 		this.scene.add(this.bubbleThree);
 
+		const planeControlGeo = new PlaneGeometry(600, 600);
+		const planeControlMat = new MeshBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
+		this.planeOne = new Mesh(planeControlGeo, planeControlMat);
+		this.planeOne.rotation.x = -Math.PI / 2;
+		this.planeOne.position.set(-1500, 100, 3000);
+		this.scene.add(this.planeOne);
+
+		this.planeTwo = new Mesh(planeControlGeo, planeControlMat);
+		this.planeTwo.rotation.x = -Math.PI / 2;
+		this.planeTwo.position.set(0, 100, 3000);
+		this.scene.add(this.planeTwo);
+
+		this.planeThree = new Mesh(planeControlGeo, planeControlMat);
+		this.planeThree.rotation.x = -Math.PI / 2;
+		this.planeThree.position.set(1500, 100, 3000);
+		this.scene.add(this.planeThree);
+
+		this.planeFour = new Mesh(planeControlGeo, planeControlMat);
+		this.planeFour.rotation.x = -Math.PI / 2;
+		this.planeFour.position.set(0, 100, 1500);
+		this.scene.add(this.planeFour);
+
+		this.fishGroup = new Group();
+		this.scene.add(this.fishGroup);
+
+		for (let i = 0; i < 5; i++) {
+			this.addFish();
+		}
+	}
+
+	addFish() {
 		// add fishes
 		const fishLoader = new OBJLoader();
 		fishLoader.load('../resources/models/fish.obj', (obj: any) => {
 			this.fish = obj;
 			this.fish.scale.set(20, 20, 20);
-			this.fish.position.set(4000, 0, 1000);
+			this.fish.position.set(Math.random() * (4400 + 4400 + 1) - 4400, 0, Math.random() * (0 + 4000 + 1) - 4000);
 			this.fish.rotateX(180.7);
-			this.scene.add(this.fish);
+
+			this.fish.traverse((child: Object3D) => {
+				if (child.type === 'Mesh') {
+					(child as gltfMesh).material = new MeshPhongMaterial({ color: 0xffa500 });
+				}
+			});
+
+			this.fishGroup.add(this.fish);
 		});
 	}
 
@@ -205,9 +248,31 @@ export class ViewOne extends BaseView {
 		//@ts-ignore
 		this.water.material.uniforms['time'].value += 1.0 / 30.0;
 
-		// check for collision and change background
+		if (this.group.position.z <= -800 && this.group.position.z >= -1200 && this.group.position.x === 0) {
+			this.fishGroup.position.z += 10;
+		} else if (this.group.position.z <= -2300 && this.group.position.z >= -2700 && this.group.position.x === 0) {
+			this.fishGroup.position.z -= 10;
+		} else if (
+			this.group.position.z <= -800 &&
+			this.group.position.z >= -1200 &&
+			this.group.position.x <= -1300 &&
+			this.group.position.x >= -1600
+		) {
+			this.fishGroup.position.x -= 10;
+		} else if (
+			this.group.position.z <= -800 &&
+			this.group.position.z >= -1200 &&
+			this.group.position.x <= 1800 &&
+			this.group.position.x >= 1400
+		) {
+			this.fishGroup.position.x += 10;
+		}
+
 		if (this.group.position.x == -2200 && this.group.position.z == -6000) {
+			// check for collision and change background
 			this.scene.add(this.interstellar);
+			this.fishGroup.visible = false;
+
 			if (this.scene.children.includes(this.skybox)) {
 				this.scene.remove(this.skybox);
 			} else if (this.scene.children.includes(this.galaxy)) {
@@ -215,6 +280,10 @@ export class ViewOne extends BaseView {
 			}
 		} else if (this.group.position.x == 2200 && this.group.position.z == -6000) {
 			this.scene.add(this.galaxy);
+
+			this.fishGroup.children.forEach((item) => {
+				item.position.x -= 20;
+			});
 			if (this.scene.children.includes(this.skybox)) {
 				this.scene.remove(this.skybox);
 			} else if (this.scene.children.includes(this.galaxy)) {
@@ -222,6 +291,11 @@ export class ViewOne extends BaseView {
 			}
 		} else if (this.group.position.x == 0 && this.group.position.z == -6000) {
 			this.scene.add(this.skybox);
+			this.fishGroup.visible = true;
+
+			this.fishGroup.children.forEach((item) => {
+				item.position.x += 20;
+			});
 			if (this.scene.children.includes(this.galaxy)) {
 				this.scene.remove(this.galaxy);
 			} else if (this.scene.children.includes(this.interstellar)) {
