@@ -93,21 +93,25 @@ function initListeners() {
 			case 'ArrowRight':
 				viewOne.group.position.x += 100;
 				viewOne.camera.position.x += 100;
+				console.log(viewOne.group.position);
 				break;
 
 			case 'ArrowLeft':
 				viewOne.group.position.x -= 100;
 				viewOne.camera.position.x -= 100;
+				console.log(viewOne.group.position);
 				break;
 
 			case 'ArrowUp':
 				viewOne.group.position.z -= 100;
 				viewOne.camera.position.z -= 100;
+				console.log(viewOne.group.position);
 				break;
 
 			case 'ArrowDown':
 				viewOne.group.position.z += 100;
 				viewOne.camera.position.z += 100;
+				console.log(viewOne.group.position);
 				break;
 
 			default:

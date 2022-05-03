@@ -188,14 +188,13 @@ export class ViewOne extends BaseView {
 		this.bubbleThree.position.y = 600;
 		this.bubbleThree.position.z = -2000;
 		this.scene.add(this.bubbleThree);
-	}
 
-	addFish() {
+		// add fishes
 		const fishLoader = new OBJLoader();
 		fishLoader.load('../resources/models/fish.obj', (obj: any) => {
 			this.fish = obj;
 			this.fish.scale.set(20, 20, 20);
-			this.fish.position.set(Math.random() * -3000, 0, Math.random() * -7000);
+			this.fish.position.set(4000, 0, 1000);
 			this.fish.rotateX(180.7);
 			this.scene.add(this.fish);
 		});
@@ -207,29 +206,26 @@ export class ViewOne extends BaseView {
 		this.water.material.uniforms['time'].value += 1.0 / 30.0;
 
 		// check for collision and change background
-		if (this.group.position.x <= -2200 && this.group.position.z <= -5500) {
+		if (this.group.position.x == -2200 && this.group.position.z == -6000) {
+			this.scene.add(this.interstellar);
 			if (this.scene.children.includes(this.skybox)) {
 				this.scene.remove(this.skybox);
-				this.scene.add(this.interstellar);
 			} else if (this.scene.children.includes(this.galaxy)) {
 				this.scene.remove(this.galaxy);
-				this.scene.add(this.interstellar);
 			}
-		} else if (this.group.position.x >= 2200 && this.group.position.z >= -6100) {
+		} else if (this.group.position.x == 2200 && this.group.position.z == -6000) {
+			this.scene.add(this.galaxy);
 			if (this.scene.children.includes(this.skybox)) {
 				this.scene.remove(this.skybox);
-				this.scene.add(this.galaxy);
 			} else if (this.scene.children.includes(this.galaxy)) {
 				this.scene.remove(this.interstellar);
-				this.scene.add(this.galaxy);
 			}
-		} else if (this.group.position.x == 0 && this.group.position.z >= -6100) {
+		} else if (this.group.position.x == 0 && this.group.position.z == -6000) {
+			this.scene.add(this.skybox);
 			if (this.scene.children.includes(this.galaxy)) {
 				this.scene.remove(this.galaxy);
-				this.scene.add(this.skybox);
 			} else if (this.scene.children.includes(this.interstellar)) {
 				this.scene.remove(this.interstellar);
-				this.scene.add(this.skybox);
 			}
 		}
 	}

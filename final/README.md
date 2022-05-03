@@ -1,6 +1,10 @@
 # Final Project
 
-- Live: []
+- [Live](https://michellewongi.github.io/Advanced_CC/final/dist/)
+
+## Inspo
+
+![](./images/inspo2.png) ![](./images/inspo3.jpg)
 
 ## Overview
 

@@ -8,7 +8,6 @@ For my final concept I wanted to create an interactive 3D scene. I wanted to hav
 
 ![](./images/inspo2.png)
 ![](./images/inspo3.jpg)
-![](./images/inspo1.jpg)
 
 ## Anticipated Challenges
 
