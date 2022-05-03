@@ -280,10 +280,6 @@ export class ViewOne extends BaseView {
 			}
 		} else if (this.group.position.x == 2200 && this.group.position.z == -6000) {
 			this.scene.add(this.galaxy);
-
-			this.fishGroup.children.forEach((item) => {
-				item.position.x -= 20;
-			});
 			if (this.scene.children.includes(this.skybox)) {
 				this.scene.remove(this.skybox);
 			} else if (this.scene.children.includes(this.galaxy)) {
@@ -293,9 +289,6 @@ export class ViewOne extends BaseView {
 			this.scene.add(this.skybox);
 			this.fishGroup.visible = true;
 
-			this.fishGroup.children.forEach((item) => {
-				item.position.x += 20;
-			});
 			if (this.scene.children.includes(this.galaxy)) {
 				this.scene.remove(this.galaxy);
 			} else if (this.scene.children.includes(this.interstellar)) {
