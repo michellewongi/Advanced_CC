@@ -1,4 +1,4 @@
-# Final Project
+# Final Project: 3D Landscape
 
 - Live: [https://michellewongi.github.io/Advanced_CC/final/dist/](https://michellewongi.github.io/Advanced_CC/final/dist/)
 
