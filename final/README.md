@@ -16,7 +16,7 @@ For my final project, I made a 3D ocean landscape. For the backgrounds of the sc
 
 ## Further Development
 
-For further development, I would add different background noises to the different scenes. I also want to animate the fish in the scene to move around individually.
+For further development, I would add different background noises to the different scenes. I also want to animate the fishes in the scene to move around.
 
 ## Technologies
 
